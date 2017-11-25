@@ -3,6 +3,7 @@ using UIKit;
 using MvvmCross.Platform;
 using MvvmCross.iOS.Platform;
 using MvvmCross.Core.ViewModels;
+using AppStore.iOS.Views;
 
 namespace AppStore.iOS
 {
@@ -33,6 +34,9 @@ namespace AppStore.iOS
             var startup = Mvx.Resolve<IMvxAppStart>();
             startup.Start();
 
+            //var layout = new UICollectionViewFlowLayout();
+
+            //Window.RootViewController = new UINavigationController(new MainView(layout));
             Window.MakeKeyAndVisible();
 
             return true;
