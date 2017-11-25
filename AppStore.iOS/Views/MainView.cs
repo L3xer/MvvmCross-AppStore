@@ -40,7 +40,7 @@ namespace AppStore.iOS.Views
         [Export("collectionView:layout:sizeForItemAtIndexPath:")]
         public CGSize GetSizeForItem(UICollectionView collectionView, UICollectionViewLayout layout, NSIndexPath indexPath)
         {
-            return new CGSize(View.Frame.Width, 150);
+            return new CGSize(View.Frame.Width, 230);
         }
 
         #endregion
