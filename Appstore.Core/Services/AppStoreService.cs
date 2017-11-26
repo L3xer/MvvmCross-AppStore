@@ -35,6 +35,7 @@ namespace Appstore.Core.Services
 
                 var telepaintApp = new StoreApp {
                     Name = "Telepaint",
+                    ImageName = "telepaint",
                     Category = "Games",
                     Price = 2.99f
                 };

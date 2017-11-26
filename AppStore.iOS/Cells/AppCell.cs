@@ -1,10 +1,14 @@
 ﻿using CoreGraphics;
 using System;
 using UIKit;
+using MvvmCross.Binding.iOS.Views;
+using MvvmCross.Binding.BindingContext;
+using Appstore.Core.Models;
+using AppStore.iOS.Converters;
 
 namespace AppStore.iOS.Cells
 {
-    public class AppCell : UICollectionViewCell
+    public class AppCell : MvxCollectionViewCell
     {
         private UIImageView imageView;
         public UIImageView ImageView
@@ -12,7 +16,7 @@ namespace AppStore.iOS.Cells
             get
             {
                 if (imageView == null) {
-                    imageView = new UIImageView(UIImage.FromBundle("frozen"));
+                    imageView = new UIImageView();
                     imageView.ContentMode = UIViewContentMode.ScaleAspectFill;
                     imageView.Layer.CornerRadius = 16;
                     imageView.Layer.MasksToBounds = true;
@@ -29,7 +33,6 @@ namespace AppStore.iOS.Cells
             {
                 if (nameLabel == null) {
                     nameLabel = new UILabel {
-                        Text = "Disney Build It: Frozen",
                         Lines = 2,
                         Font = UIFont.SystemFontOfSize(14)
                     };
@@ -46,7 +49,6 @@ namespace AppStore.iOS.Cells
             {
                 if (categoryLabel == null) {
                     categoryLabel = new UILabel {
-                        Text = "Entertaiment",
                         TextColor = UIColor.DarkGray,
                         Font = UIFont.SystemFontOfSize(13)
                     };
@@ -63,7 +65,6 @@ namespace AppStore.iOS.Cells
             {
                 if (priceLabel == null) {
                     priceLabel = new UILabel {
-                        Text = "$3.99",
                         TextColor = UIColor.DarkGray,
                         Font = UIFont.SystemFontOfSize(13)
                     };
@@ -73,12 +74,11 @@ namespace AppStore.iOS.Cells
             }
         }
 
-
         public AppCell(IntPtr handle) : base(handle)
         {
             SetupViews();
+            SetupBindings();
         }
-
 
         private void SetupViews()
         {
@@ -91,6 +91,18 @@ namespace AppStore.iOS.Cells
             NameLabel.Frame = new CGRect(0, Frame.Width + 2, Frame.Width, 40);
             CategoryLabel.Frame = new CGRect(0, Frame.Width + 38, Frame.Width, 20);
             PriceLabel.Frame = new CGRect(0, Frame.Width + 56, Frame.Width, 20);
+        }
+
+        private void SetupBindings()
+        {
+            this.DelayBind(() => {
+                var set = this.CreateBindingSet<AppCell, StoreApp>();
+                set.Bind(NameLabel).To(a => a.Name);
+                set.Bind(CategoryLabel).To(a => a.Category);
+                set.Bind(PriceLabel).To(a => a.Price);
+                set.Bind(ImageView).For(iv => iv.Image).To(a => a.ImageName).WithConversion(new ImageNameToUIImageValueConverter());
+                set.Apply();
+            });
         }
     }
 }

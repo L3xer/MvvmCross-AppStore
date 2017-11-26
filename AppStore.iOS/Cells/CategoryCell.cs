@@ -1,11 +1,14 @@
 ﻿using CoreGraphics;
-using Foundation;
 using System;
 using UIKit;
+using MvvmCross.Binding.iOS.Views;
+using MvvmCross.Binding.BindingContext;
+using Appstore.Core.Models;
+using AppStore.iOS.ViewSources;
 
 namespace AppStore.iOS.Cells
 {
-    public class CategoryCell : UICollectionViewCell, IUICollectionViewDataSource, IUICollectionViewDelegate, IUICollectionViewDelegateFlowLayout
+    public class CategoryCell : MvxCollectionViewCell
     {
         private string cellId = "appCellId";
 
@@ -16,7 +19,6 @@ namespace AppStore.iOS.Cells
             {
                 if (nameLabel == null) {
                     nameLabel = new UILabel {
-                        Text = "Best New Apps",
                         Font = UIFont.SystemFontOfSize(16),
                         TranslatesAutoresizingMaskIntoConstraints = false
                     };
@@ -25,7 +27,6 @@ namespace AppStore.iOS.Cells
                 return nameLabel;
             }
         }
-
 
         private UICollectionView appsCollectionView;
         public UICollectionView AppsCollectionView
@@ -62,9 +63,12 @@ namespace AppStore.iOS.Cells
             }
         }
 
+        private AppsCollectionViewSource _appsSource;
+
         public CategoryCell(IntPtr handle) : base(handle)
         {
             SetupViews();
+            SetupBindings();
         }
 
         private void SetupViews()
@@ -75,10 +79,11 @@ namespace AppStore.iOS.Cells
             AddSubview(DividerLineView);
             AddSubview(NameLabel);
 
-            AppsCollectionView.WeakDataSource = this;
-            AppsCollectionView.Delegate = this;
-
             AppsCollectionView.RegisterClassForCell(typeof(AppCell), cellId);
+
+            _appsSource = new AppsCollectionViewSource(this, AppsCollectionView, cellId);
+            AppsCollectionView.Source = _appsSource;
+
 
             AddConstraints(NSLayoutConstraint.FromVisualFormat("H:|-14-[v0]|", 0, "v0", NameLabel));
             AddConstraints(NSLayoutConstraint.FromVisualFormat("H:|-14-[v0]|", 0, "v0", DividerLineView));
@@ -86,30 +91,14 @@ namespace AppStore.iOS.Cells
             AddConstraints(NSLayoutConstraint.FromVisualFormat("V:|[v0(30)][v1][v2(0.5)]|", 0, "v0", NameLabel, "v1", AppsCollectionView, "v2", DividerLineView));
         }
 
-        public nint GetItemsCount(UICollectionView collectionView, nint section)
+        private void SetupBindings()
         {
-            return 5;
+            this.DelayBind(() => {
+                var set = this.CreateBindingSet<CategoryCell, AppCategory>();
+                set.Bind(NameLabel).To(c => c.Name);
+                set.Bind(_appsSource).To(c => c.Apps);
+                set.Apply();
+            });
         }
-
-        public UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
-        {
-            return collectionView.DequeueReusableCell(cellId, indexPath) as AppCell;
-        }
-
-        #region IUICollectionViewDelegateFlowLayout
-
-        [Export("collectionView:layout:sizeForItemAtIndexPath:")]
-        public CGSize GetSizeForItem(UICollectionView collectionView, UICollectionViewLayout layout, NSIndexPath indexPath)
-        {
-            return new CGSize(100, Frame.Height - 32);
-        }
-
-        [Export("collectionView:layout:insetForSectionAtIndex:")]
-        public virtual UIEdgeInsets GetInsetForSection(UICollectionView collectionView, UICollectionViewLayout layout, Int32 section)
-        {
-            return new UIEdgeInsets(0, 14, 0, 14);
-        }
-
-        #endregion
     }
 }

@@ -41,5 +41,6 @@
     </objects>
     <resources>
         <image name="frozen" width="175" height="175"/>
+        <image name="telepaint" width="175" height="175"/>
     </resources>
 </document>

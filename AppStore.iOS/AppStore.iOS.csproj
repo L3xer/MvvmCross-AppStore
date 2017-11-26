@@ -89,11 +89,14 @@
   <ItemGroup>
     <Compile Include="Cells\AppCell.cs" />
     <Compile Include="Cells\CategoryCell.cs" />
+    <Compile Include="Converters\ImageNameToUIImageValueConverter.cs" />
     <Compile Include="DebugTrace.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Setup.cs" />
+    <Compile Include="ViewSources\AppsCollectionViewSource.cs" />
+    <Compile Include="ViewSources\CategoriesCollectionViewSource.cs" />
     <Compile Include="Views\MainView.cs" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -153,6 +156,12 @@
       <InProject>false</InProject>
     </ImageAsset>
     <ImageAsset Include="Resources\Media.xcassets\LaunchImages.launchimage\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\telepaint.imageset\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\telepaint.imageset\telepaint.png">
       <InProject>false</InProject>
     </ImageAsset>
   </ItemGroup>
