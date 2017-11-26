@@ -39,4 +39,7 @@
             <point key="canvasLocation" x="548" y="455"/>
         </view>
     </objects>
+    <resources>
+        <image name="frozen" width="175" height="175"/>
+    </resources>
 </document>

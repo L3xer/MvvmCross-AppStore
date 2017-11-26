@@ -34,9 +34,6 @@ namespace AppStore.iOS
             var startup = Mvx.Resolve<IMvxAppStart>();
             startup.Start();
 
-            //var layout = new UICollectionViewFlowLayout();
-
-            //Window.RootViewController = new UINavigationController(new MainView(layout));
             Window.MakeKeyAndVisible();
 
             return true;
