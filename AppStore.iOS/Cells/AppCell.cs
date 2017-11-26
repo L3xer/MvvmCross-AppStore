@@ -1,10 +1,12 @@
-﻿using CoreGraphics;
-using System;
+﻿using System;
 using UIKit;
+using Foundation;
+using CoreGraphics;
 using MvvmCross.Binding.iOS.Views;
 using MvvmCross.Binding.BindingContext;
 using Appstore.Core.Models;
 using Appstore.Core.Converters;
+using AppStore.iOS.Controls;
 using AppStore.iOS.Converters;
 
 
@@ -28,13 +30,13 @@ namespace AppStore.iOS.Cells
             }
         }
 
-        private UILabel nameLabel;
-        public UILabel NameLabel
+        private SALabel nameLabel;
+        public SALabel NameLabel
         {
             get
             {
                 if (nameLabel == null) {
-                    nameLabel = new UILabel {
+                    nameLabel = new SALabel {
                         Lines = 2,
                         Font = UIFont.SystemFontOfSize(14)
                     };
@@ -93,18 +95,43 @@ namespace AppStore.iOS.Cells
             NameLabel.Frame = new CGRect(0, Frame.Width + 2, Frame.Width, 40);
             CategoryLabel.Frame = new CGRect(0, Frame.Width + 38, Frame.Width, 20);
             PriceLabel.Frame = new CGRect(0, Frame.Width + 56, Frame.Width, 20);
+
+            NameLabel.TextUpdated += (object sender, EventArgs e) => {
+                UpdateLayout();
+            };
         }
+
 
         private void SetupBindings()
         {
             this.DelayBind(() => {
                 var set = this.CreateBindingSet<AppCell, StoreApp>();
-                set.Bind(NameLabel).To(a => a.Name);
+                set.Bind(NameLabel).For(l => l.LabelText).To(a => a.Name);
                 set.Bind(CategoryLabel).To(a => a.Category);
                 set.Bind(PriceLabel).To(a => a.Price).WithConversion(new PriceToFormattedPriceValueConverter());
                 set.Bind(ImageView).For(iv => iv.Image).To(a => a.ImageName).WithConversion(new ImageNameToUIImageValueConverter());
                 set.Apply();
             });
+        }
+
+        private void UpdateLayout()
+        {
+            var rect = new NSString(NameLabel.LabelText).GetBoundingRect(
+                new CGSize(Frame.Width, 1000),
+                NSStringDrawingOptions.UsesFontLeading | NSStringDrawingOptions.UsesLineFragmentOrigin,
+                new UIStringAttributes() { Font = UIFont.SystemFontOfSize(14) },
+                null);
+
+            if (rect.Height > 20) {
+                CategoryLabel.Frame = new CGRect(0, Frame.Width + 38, Frame.Width, 20);
+                PriceLabel.Frame = new CGRect(0, Frame.Width + 56, Frame.Width, 20);
+            } else {
+                CategoryLabel.Frame = new CGRect(0, Frame.Width + 22, Frame.Width, 20);
+                PriceLabel.Frame = new CGRect(0, Frame.Width + 40, Frame.Width, 20);
+            }
+
+            NameLabel.Frame = new CGRect(0, Frame.Width + 5, Frame.Width, 40);
+            NameLabel.SizeToFit();
         }
     }
 }

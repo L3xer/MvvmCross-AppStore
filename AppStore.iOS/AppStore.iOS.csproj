@@ -91,6 +91,7 @@
   <ItemGroup>
     <Compile Include="Cells\AppCell.cs" />
     <Compile Include="Cells\CategoryCell.cs" />
+    <Compile Include="Controls\ASLabel.cs" />
     <Compile Include="Converters\ImageNameToUIImageValueConverter.cs" />
     <Compile Include="DebugTrace.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />
@@ -255,6 +256,7 @@
       <InProject>false</InProject>
     </ImageAsset>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Refit.4.0.1\build\netstandard1.4\refit.targets" Condition="Exists('..\packages\Refit.4.0.1\build\netstandard1.4\refit.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
