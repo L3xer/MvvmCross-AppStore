@@ -8,7 +8,11 @@ namespace Appstore.Core.Converters
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return string.Format("${0:0.00}", (float)value);
+            float price = (float)value;
+            if (price == 0)
+                return string.Empty;
+
+            return string.Format("${0:0.00}", price);
         }
 
         public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

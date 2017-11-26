@@ -42,5 +42,15 @@
     <resources>
         <image name="frozen" width="175" height="175"/>
         <image name="telepaint" width="175" height="175"/>
+        <image name="angrybirdsspace" width="175" height="175"/>
+        <image name="beatstomper" width="175" height="175"/>
+        <image name="clashroyale" width="175" height="175"/>
+        <image name="deathworm" width="175" height="175"/>
+        <image name="dine" width="175" height="175"/>
+        <image name="dirac" width="175" height="175"/>
+        <image name="spot" width="175" height="175"/>
+        <image name="starwars" width="175" height="175"/>
+        <image name="summonerswar" width="175" height="175"/>
+        <image name="today" width="175" height="175"/>
     </resources>
 </document>
