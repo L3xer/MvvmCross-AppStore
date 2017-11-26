@@ -4,7 +4,9 @@ using UIKit;
 using MvvmCross.Binding.iOS.Views;
 using MvvmCross.Binding.BindingContext;
 using Appstore.Core.Models;
+using Appstore.Core.Converters;
 using AppStore.iOS.Converters;
+
 
 namespace AppStore.iOS.Cells
 {
@@ -99,7 +101,7 @@ namespace AppStore.iOS.Cells
                 var set = this.CreateBindingSet<AppCell, StoreApp>();
                 set.Bind(NameLabel).To(a => a.Name);
                 set.Bind(CategoryLabel).To(a => a.Category);
-                set.Bind(PriceLabel).To(a => a.Price);
+                set.Bind(PriceLabel).To(a => a.Price).WithConversion(new PriceToFormattedPriceValueConverter());
                 set.Bind(ImageView).For(iv => iv.Image).To(a => a.ImageName).WithConversion(new ImageNameToUIImageValueConverter());
                 set.Apply();
             });
