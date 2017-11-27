@@ -14,6 +14,8 @@ namespace AppStore.iOS.Cells
 {
     public class AppCell : MvxCollectionViewCell
     {
+        public static readonly string Id = "AppCellId";
+
         private UIImageView imageView;
         public UIImageView ImageView
         {

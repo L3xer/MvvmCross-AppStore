@@ -52,5 +52,18 @@
         <image name="starwars" width="175" height="175"/>
         <image name="summonerswar" width="175" height="175"/>
         <image name="today" width="175" height="175"/>
+        <image name="badland" width="460" height="215"/>
+        <image name="clashRoyaleBanner" width="697" height="338"/>
+        <image name="drSeussBanner" width="697" height="337"/>
+        <image name="enhancedWith3dTouch" width="945" height="456"/>
+        <image name="indieGameBanner" width="697" height="336"/>
+        <image name="luminocity" width="460" height="215"/>
+        <image name="shadowmatic" width="600" height="350"/>
+        <image name="telepaint1" width="640" height="360"/>
+        <image name="telepaint2" width="640" height="360"/>
+        <image name="telepaint3" width="640" height="360"/>
+        <image name="telepaint4" width="640" height="360"/>
+        <image name="telepaint5" width="640" height="360"/>
+        <image name="theroom" width="460" height="215"/>
     </resources>
 </document>

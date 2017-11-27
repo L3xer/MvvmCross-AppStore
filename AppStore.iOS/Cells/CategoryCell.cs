@@ -10,7 +10,7 @@ namespace AppStore.iOS.Cells
 {
     public class CategoryCell : MvxCollectionViewCell
     {
-        private string cellId = "appCellId";
+        public static readonly string Id = "CategoryCellId";
 
         private UILabel nameLabel;
         public UILabel NameLabel
@@ -79,9 +79,9 @@ namespace AppStore.iOS.Cells
             AddSubview(DividerLineView);
             AddSubview(NameLabel);
 
-            AppsCollectionView.RegisterClassForCell(typeof(AppCell), cellId);
+            AppsCollectionView.RegisterClassForCell(typeof(AppCell), AppCell.Id);
 
-            _appsSource = new AppsCollectionViewSource(this, AppsCollectionView, cellId);
+            _appsSource = new AppsCollectionViewSource(this, AppsCollectionView, AppCell.Id);
             AppsCollectionView.Source = _appsSource;
 
 
