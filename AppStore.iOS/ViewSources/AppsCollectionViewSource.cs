@@ -10,7 +10,7 @@ namespace AppStore.iOS.ViewSources
 {
     public class AppsCollectionViewSource : MvxCollectionViewSource, IUICollectionViewDelegateFlowLayout
     {
-        private CategoryCell _categoryCell;
+        protected CategoryCell _categoryCell;
 
         public AppsCollectionViewSource(CategoryCell categoryCell, UICollectionView collectionView, string cellId) : base(collectionView, new NSString(cellId))
         {

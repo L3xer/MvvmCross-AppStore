@@ -91,6 +91,7 @@
   <ItemGroup>
     <Compile Include="Cells\AppCell.cs" />
     <Compile Include="Cells\CategoryCell.cs" />
+    <Compile Include="Cells\LargeAppCell.cs" />
     <Compile Include="Cells\LargeCategoryCell.cs" />
     <Compile Include="Controls\ASLabel.cs" />
     <Compile Include="Converters\ImageNameToUIImageValueConverter.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Setup.cs" />
     <Compile Include="ViewSources\AppsCollectionViewSource.cs" />
     <Compile Include="ViewSources\CategoriesCollectionViewSource.cs" />
+    <Compile Include="ViewSources\LargeAppsCollectionViewSource.cs" />
     <Compile Include="Views\MainView.cs" />
     <None Include="app.config" />
     <None Include="Info.plist" />
