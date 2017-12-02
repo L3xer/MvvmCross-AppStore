@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using Appstore.Core.Models;
 using Appstore.Core.Services;
@@ -10,14 +11,15 @@ namespace Appstore.Core.ViewModels
 {
     public class MainViewModel : MvxViewModel
     {
-        private IAppStoreService _appStoreService;
-
         public IMvxCommand<StoreApp> AppSelectedCommand { get; private set; }
-
         public MvxObservableCollection<CategoryCellViewModel> Categories { get; } = new MvxObservableCollection<CategoryCellViewModel>();
 
-        public MainViewModel(IAppStoreService appStoreService)
+        private IAppStoreService _appStoreService;
+        private IMvxNavigationService _navigationService;
+
+        public MainViewModel(IMvxNavigationService navigationService, IAppStoreService appStoreService)
         {
+            _navigationService = navigationService;
             _appStoreService = appStoreService;
 
             AppSelectedCommand = new MvxAsyncCommand<StoreApp>(AppSelectedExecute);
@@ -31,9 +33,9 @@ namespace Appstore.Core.ViewModels
             Categories.AddRange(categories.ToCategoryCellViewModel(this));
         }
 
-        private async Task AppSelectedExecute(StoreApp app)
+        private async Task AppSelectedExecute(StoreApp storeApp)
         {
-            System.Diagnostics.Debug.WriteLine("App selected: " + app.Id);
+            await _navigationService.Navigate<AppDetailViewModel, StoreApp>(storeApp);
         }
     }
 }

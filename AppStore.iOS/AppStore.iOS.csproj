@@ -103,6 +103,7 @@
     <Compile Include="ViewSources\AppsCollectionViewSource.cs" />
     <Compile Include="ViewSources\CategoriesCollectionViewSource.cs" />
     <Compile Include="ViewSources\LargeAppsCollectionViewSource.cs" />
+    <Compile Include="Views\AppDetailView.cs" />
     <Compile Include="Views\MainView.cs" />
     <None Include="app.config" />
     <None Include="Info.plist" />
