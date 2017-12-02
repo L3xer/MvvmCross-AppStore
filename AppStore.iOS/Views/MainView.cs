@@ -19,6 +19,8 @@ namespace AppStore.iOS.Views
         {
             base.ViewDidLoad();
 
+            NavigationItem.Title = "Featured";
+
             CollectionView.BackgroundColor = UIColor.White;
             CollectionView.RegisterClassForCell(typeof(CategoryCell), CategoryCell.Id);
             CollectionView.RegisterClassForCell(typeof(LargeCategoryCell), LargeCategoryCell.Id);
