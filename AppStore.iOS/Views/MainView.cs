@@ -5,6 +5,7 @@ using Appstore.Core.ViewModels;
 using AppStore.iOS.Cells;
 using AppStore.iOS.ViewSources;
 
+
 namespace AppStore.iOS.Views
 {
     public class MainView : MvxCollectionViewController<MainViewModel>

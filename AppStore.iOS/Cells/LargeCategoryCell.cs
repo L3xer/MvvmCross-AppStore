@@ -1,7 +1,7 @@
 ﻿using System;
 using MvvmCross.Binding.BindingContext;
 using AppStore.iOS.ViewSources;
-using Appstore.Core.Models;
+using Appstore.Core.CellViewModels;
 
 namespace AppStore.iOS.Cells
 {
@@ -28,8 +28,9 @@ namespace AppStore.iOS.Cells
         private void SetupBindings()
         {
             this.DelayBind(() => {
-                var set = this.CreateBindingSet<LargeCategoryCell, AppCategory>();
-                set.Bind(_appsSource).To(c => c.Apps);
+                var set = this.CreateBindingSet<LargeCategoryCell, CategoryCellViewModel>();
+                set.Bind(_appsSource).To(c => c.Item.Apps);
+                set.Bind(_appsSource).For(s => s.SelectionChangedCommand).To(c => c.ViewModel.AppSelectedCommand);
                 set.Apply();
             });
         }

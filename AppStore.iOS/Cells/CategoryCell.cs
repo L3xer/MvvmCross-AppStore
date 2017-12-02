@@ -3,8 +3,9 @@ using System;
 using UIKit;
 using MvvmCross.Binding.iOS.Views;
 using MvvmCross.Binding.BindingContext;
-using Appstore.Core.Models;
+using Appstore.Core.CellViewModels;
 using AppStore.iOS.ViewSources;
+
 
 namespace AppStore.iOS.Cells
 {
@@ -94,9 +95,10 @@ namespace AppStore.iOS.Cells
         private void SetupBindings()
         {
             this.DelayBind(() => {
-                var set = this.CreateBindingSet<CategoryCell, AppCategory>();
-                set.Bind(NameLabel).To(c => c.Name);
-                set.Bind(_appsSource).To(c => c.Apps);
+                var set = this.CreateBindingSet<CategoryCell, CategoryCellViewModel>();
+                set.Bind(NameLabel).To(c => c.Item.Name);
+                set.Bind(_appsSource).To(c => c.Item.Apps);
+                set.Bind(_appsSource).For(s => s.SelectionChangedCommand).To(c => c.ViewModel.AppSelectedCommand);
                 set.Apply();
             });
         }

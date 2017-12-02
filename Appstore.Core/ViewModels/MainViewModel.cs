@@ -2,6 +2,9 @@
 using MvvmCross.Core.ViewModels;
 using Appstore.Core.Models;
 using Appstore.Core.Services;
+using Appstore.Core.Extensions;
+using Appstore.Core.CellViewModels;
+
 
 namespace Appstore.Core.ViewModels
 {
@@ -9,11 +12,15 @@ namespace Appstore.Core.ViewModels
     {
         private IAppStoreService _appStoreService;
 
-        public MvxObservableCollection<AppCategory> Categories { get; } = new MvxObservableCollection<AppCategory>();
+        public IMvxCommand<StoreApp> AppSelectedCommand { get; private set; }
+
+        public MvxObservableCollection<CategoryCellViewModel> Categories { get; } = new MvxObservableCollection<CategoryCellViewModel>();
 
         public MainViewModel(IAppStoreService appStoreService)
         {
             _appStoreService = appStoreService;
+
+            AppSelectedCommand = new MvxAsyncCommand<StoreApp>(AppSelectedExecute);
         }
 
         public override async Task Initialize()
@@ -21,7 +28,12 @@ namespace Appstore.Core.ViewModels
             var categories = await _appStoreService.GetAppCategoriesAsync();
 
             Categories.Clear();
-            Categories.AddRange(categories);
+            Categories.AddRange(categories.ToCategoryCellViewModel(this));
+        }
+
+        private async Task AppSelectedExecute(StoreApp app)
+        {
+            System.Diagnostics.Debug.WriteLine("App selected: " + app.Id);
         }
     }
 }
