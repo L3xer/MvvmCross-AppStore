@@ -19,7 +19,7 @@ namespace AppStore.iOS.Views
         {
             base.ViewDidLoad();
 
-            NavigationItem.Title = "Featured";
+            NavigationItem.Title = "Featured Apps";
 
             CollectionView.BackgroundColor = UIColor.White;
             CollectionView.RegisterClassForCell(typeof(CategoryCell), CategoryCell.Id);

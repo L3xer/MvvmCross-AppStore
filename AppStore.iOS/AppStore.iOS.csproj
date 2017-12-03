@@ -90,6 +90,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Cells\AppCell.cs" />
+    <Compile Include="Cells\AppDetailHeaderCell.cs" />
     <Compile Include="Cells\CategoryCell.cs" />
     <Compile Include="Cells\LargeAppCell.cs" />
     <Compile Include="Cells\LargeCategoryCell.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Setup.cs" />
+    <Compile Include="ViewSources\AppDetailCollectionViewSource.cs" />
     <Compile Include="ViewSources\AppsCollectionViewSource.cs" />
     <Compile Include="ViewSources\CategoriesCollectionViewSource.cs" />
     <Compile Include="ViewSources\LargeAppsCollectionViewSource.cs" />

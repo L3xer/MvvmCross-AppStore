@@ -5,9 +5,11 @@ namespace Appstore.Core.ViewModels
 {
     public class AppDetailViewModel : MvxViewModel<StoreApp>
     {
+        public StoreApp StoreApp { get; set; }
+
         public override void Prepare(StoreApp storeApp)
         {
-            System.Diagnostics.Debug.WriteLine("App id: " + storeApp.Id);
+            StoreApp = storeApp;
         }
     }
 }
