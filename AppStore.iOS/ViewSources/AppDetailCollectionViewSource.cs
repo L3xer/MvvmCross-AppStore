@@ -25,10 +25,30 @@ namespace AppStore.iOS.ViewSources
             return header;
         }
 
+        public override nint GetItemsCount(UICollectionView collectionView, nint section)
+        {
+            return 1;
+        }
+
+        protected override UICollectionViewCell GetOrCreateCellFor(UICollectionView collectionView, NSIndexPath indexPath, object item)
+        {
+            return collectionView.DequeueReusableCell(ScreenshotsCell.Id, indexPath) as ScreenshotsCell;
+        }
+
+        #region IUICollectionViewDelegateFlowLayout
+        
+        [Export("collectionView:layout:sizeForItemAtIndexPath:")]
+        public CGSize GetSizeForItem(UICollectionView collectionView, UICollectionViewLayout layout, NSIndexPath indexPath)
+        {
+            return new CGSize(_appDetailView.View.Frame.Width, 200);
+        }
+
         [Export("collectionView:layout:referenceSizeForHeaderInSection:")]
         public CGSize GetReferenceSizeForHeader(UICollectionView collectionView, UICollectionViewLayout layout, Int32 section)
         {
             return new CGSize(_appDetailView.View.Frame.Width, 170);
         }
+
+        #endregion
     }
 }
