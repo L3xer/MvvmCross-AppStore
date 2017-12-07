@@ -8,5 +8,7 @@ namespace Appstore.Core.Services
     public interface IAppStoreService
     {
         Task<IEnumerable<AppCategory>> GetAppCategoriesAsync();
+
+        Task<StoreApp> GetAppDetailsAsync(int id);
     }
 }

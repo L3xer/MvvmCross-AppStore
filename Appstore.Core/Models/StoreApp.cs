@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
+
 
 namespace Appstore.Core.Models
 {
@@ -18,5 +20,14 @@ namespace Appstore.Core.Models
 
         [JsonProperty("Price")]
         public float Price { get; set; }
+
+        [JsonProperty("description")]
+        public string Description { get; set; }
+
+        [JsonProperty("Screenshots")]
+        public IEnumerable<string> Screenshots { get; set; }
+
+        [JsonProperty("appInformation")]
+        public IEnumerable<Dictionary<string, string>> AppInformation { get; set; }
     }
 }

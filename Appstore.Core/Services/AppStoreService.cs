@@ -16,5 +16,11 @@ namespace Appstore.Core.Services
 
             return featuredAppsDto.Categories;
         }
+
+        public async Task<StoreApp> GetAppDetailsAsync(int id)
+        {
+            var restAppStoreApiService = RestService.For<IRestAppStoreService>("http://api.letsbuildthatapp.com");
+            return await restAppStoreApiService.GetAppDetailsAsync(id);
+        }
     }
 }
