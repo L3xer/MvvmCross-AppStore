@@ -29,8 +29,7 @@ namespace Appstore.Core.ViewModels
         {
             var categories = await _appStoreService.GetAppCategoriesAsync();
 
-            Categories.Clear();
-            Categories.AddRange(categories.ToCategoryCellViewModel(this));
+            Categories.ReplaceRange(categories.ToCategoryCellViewModel(this));
         }
 
         private async Task AppSelectedExecute(StoreApp storeApp)

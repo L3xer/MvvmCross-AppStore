@@ -3,7 +3,7 @@ using MvvmCross.iOS.Views;
 using Appstore.Core.ViewModels;
 using AppStore.iOS.Cells;
 using AppStore.iOS.ViewSources;
-
+using MvvmCross.Binding.BindingContext;
 
 namespace AppStore.iOS.Views
 {
@@ -20,8 +20,6 @@ namespace AppStore.iOS.Views
 
             CollectionView.BackgroundColor = UIColor.White;
             CollectionView.AlwaysBounceVertical = true;
-            CollectionView.RegisterClassForSupplementaryView(typeof(AppDetailHeaderCell), UICollectionElementKindSection.Header, AppDetailHeaderCell.Id);
-            CollectionView.RegisterClassForCell(typeof(ScreenshotsCell), ScreenshotsCell.Id);
 
             var source = new AppDetailCollectionViewSource(this, CollectionView, AppDetailHeaderCell.Id);
             CollectionView.Source = source;

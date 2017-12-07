@@ -2,7 +2,10 @@
 using UIKit;
 using CoreGraphics;
 using MvvmCross.Binding.iOS.Views;
+using MvvmCross.Binding.BindingContext;
+using Appstore.Core.ViewModels;
 using AppStore.iOS.ViewSources;
+
 
 namespace AppStore.iOS.Cells
 {
@@ -34,19 +37,27 @@ namespace AppStore.iOS.Cells
         public ScreenshotsCell(IntPtr handle) : base(handle)
         {
             SetupViews();
+            SetupBindings();
         }
 
         private void SetupViews()
         {
             AddSubview(CollectionView);
 
-            CollectionView.RegisterClassForCell(typeof(ScreenshotImageCell), ScreenshotImageCell.Id);
-
             _source = new ScreenshotsCollectionViewSource(this, CollectionView, ScreenshotImageCell.Id);
             CollectionView.Source = _source;
 
             AddConstraints(NSLayoutConstraint.FromVisualFormat("H:|[v0]|", 0, "v0", CollectionView));
             AddConstraints(NSLayoutConstraint.FromVisualFormat("V:|[v0]|", 0, "v0", CollectionView));
+        }
+
+        private void SetupBindings()
+        {
+            this.DelayBind(() => {
+                var set = this.CreateBindingSet<ScreenshotsCell, AppDetailViewModel>();
+                set.Bind(_source).To(vm => vm.Screenshots);
+                set.Apply();
+            });
         }
     }
 }

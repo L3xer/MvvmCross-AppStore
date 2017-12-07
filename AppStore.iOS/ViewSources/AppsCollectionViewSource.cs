@@ -15,6 +15,8 @@ namespace AppStore.iOS.ViewSources
         public AppsCollectionViewSource(CategoryCell categoryCell, UICollectionView collectionView, string cellId) : base(collectionView, new NSString(cellId))
         {
             _categoryCell = categoryCell;
+
+            collectionView.RegisterClassForCell(typeof(AppCell), AppCell.Id);
         }
 
 

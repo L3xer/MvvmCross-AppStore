@@ -19,8 +19,6 @@ namespace AppStore.iOS.Cells
 
         private void SetupViews()
         {
-            AppsCollectionView.RegisterClassForCell(typeof(LargeAppCell), LargeAppCell.Id);
-
             _appsSource = new LargeAppsCollectionViewSource(this, AppsCollectionView, LargeAppCell.Id);
             AppsCollectionView.Source = _appsSource;
         }

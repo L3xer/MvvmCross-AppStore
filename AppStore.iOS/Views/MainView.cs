@@ -22,8 +22,6 @@ namespace AppStore.iOS.Views
             NavigationItem.Title = "Featured Apps";
 
             CollectionView.BackgroundColor = UIColor.White;
-            CollectionView.RegisterClassForCell(typeof(CategoryCell), CategoryCell.Id);
-            CollectionView.RegisterClassForCell(typeof(LargeCategoryCell), LargeCategoryCell.Id);
 
             var source = new CategoriesCollectionViewSource(this, CollectionView, CategoryCell.Id);
             CollectionView.Source = source;

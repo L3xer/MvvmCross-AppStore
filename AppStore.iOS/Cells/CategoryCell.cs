@@ -78,9 +78,7 @@ namespace AppStore.iOS.Cells
 
             AddSubview(AppsCollectionView);
             AddSubview(DividerLineView);
-            AddSubview(NameLabel);
-
-            AppsCollectionView.RegisterClassForCell(typeof(AppCell), AppCell.Id);
+            AddSubview(NameLabel);            
 
             _appsSource = new AppsCollectionViewSource(this, AppsCollectionView, AppCell.Id);
             AppsCollectionView.Source = _appsSource;

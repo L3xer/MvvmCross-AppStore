@@ -10,7 +10,7 @@ namespace AppStore.iOS.ViewSources
     {
         public LargeAppsCollectionViewSource(CategoryCell categoryCell, UICollectionView collectionView, string cellId) : base(categoryCell, collectionView, cellId)
         {
-
+            collectionView.RegisterClassForCell(typeof(LargeAppCell), LargeAppCell.Id);
         }
 
         #region IUICollectionViewDelegateFlowLayout

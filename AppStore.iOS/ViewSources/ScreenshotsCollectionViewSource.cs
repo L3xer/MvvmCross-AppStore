@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UIKit;
 using Foundation;
 using CoreGraphics;
@@ -15,11 +16,21 @@ namespace AppStore.iOS.ViewSources
         public ScreenshotsCollectionViewSource(ScreenshotsCell screenshotsCell, UICollectionView collectionView, string cellId) : base(collectionView, new NSString(cellId))
         {
             _screenshotsCell = screenshotsCell;
+
+            collectionView.RegisterClassForCell(typeof(ScreenshotImageCell), ScreenshotImageCell.Id);
         }
 
-        public override nint GetItemsCount(UICollectionView collectionView, nint section)
+        public override IEnumerable ItemsSource
         {
-            return 5;
+            get => base.ItemsSource;
+            
+            set
+            {
+                if (value == null)
+                    return;
+
+                base.ItemsSource = value;
+            }
         }
 
         #region IUICollectionViewDelegateFlowLayout
@@ -27,7 +38,7 @@ namespace AppStore.iOS.ViewSources
         [Export("collectionView:layout:sizeForItemAtIndexPath:")]
         public CGSize GetSizeForItem(UICollectionView collectionView, UICollectionViewLayout layout, NSIndexPath indexPath)
         {
-            return new CGSize(200, _screenshotsCell.Frame.Height - 28);
+            return new CGSize(240, _screenshotsCell.Frame.Height - 28);
         }
 
         [Export("collectionView:layout:insetForSectionAtIndex:")]

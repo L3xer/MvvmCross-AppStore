@@ -15,6 +15,9 @@ namespace AppStore.iOS.ViewSources
         public CategoriesCollectionViewSource(MainView mainView, UICollectionView collectionView, string cellId) : base(collectionView, new NSString(cellId))
         {
             _mainView = mainView;
+
+            collectionView.RegisterClassForCell(typeof(CategoryCell), CategoryCell.Id);
+            collectionView.RegisterClassForCell(typeof(LargeCategoryCell), LargeCategoryCell.Id);
         }
 
         protected override UICollectionViewCell GetOrCreateCellFor(UICollectionView collectionView, NSIndexPath indexPath, object item)

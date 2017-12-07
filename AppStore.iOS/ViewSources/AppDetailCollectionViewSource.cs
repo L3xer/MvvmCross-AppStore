@@ -15,6 +15,9 @@ namespace AppStore.iOS.ViewSources
         public AppDetailCollectionViewSource(AppDetailView appDetailView, UICollectionView collectionView, string cellId) : base(collectionView, new NSString(cellId))
         {
             _appDetailView = appDetailView;
+
+            collectionView.RegisterClassForSupplementaryView(typeof(AppDetailHeaderCell), UICollectionElementKindSection.Header, AppDetailHeaderCell.Id);
+            collectionView.RegisterClassForCell(typeof(ScreenshotsCell), ScreenshotsCell.Id);
         }
 
         public override UICollectionReusableView GetViewForSupplementaryElement(UICollectionView collectionView, NSString elementKind, NSIndexPath indexPath)
@@ -32,7 +35,10 @@ namespace AppStore.iOS.ViewSources
 
         protected override UICollectionViewCell GetOrCreateCellFor(UICollectionView collectionView, NSIndexPath indexPath, object item)
         {
-            return collectionView.DequeueReusableCell(ScreenshotsCell.Id, indexPath) as ScreenshotsCell;
+            var screenshotsCell = collectionView.DequeueReusableCell(ScreenshotsCell.Id, indexPath) as ScreenshotsCell;
+            screenshotsCell.DataContext = _appDetailView.ViewModel;
+
+            return screenshotsCell;
         }
 
         #region IUICollectionViewDelegateFlowLayout
