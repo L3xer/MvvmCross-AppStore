@@ -1,7 +1,8 @@
-﻿using MvvmCross.Core.ViewModels;
+﻿using System.Threading.Tasks;
+using MvvmCross.Core.ViewModels;
 using Appstore.Core.Models;
 using Appstore.Core.Services;
-using System.Threading.Tasks;
+
 
 namespace Appstore.Core.ViewModels
 {
