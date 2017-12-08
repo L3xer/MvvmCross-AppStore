@@ -2,9 +2,11 @@
 using UIKit;
 using Foundation;
 using CoreGraphics;
+using MvvmCross.Platform.Core;
 using MvvmCross.Binding.iOS.Views;
 using AppStore.iOS.Cells;
 using AppStore.iOS.Views;
+
 
 namespace AppStore.iOS.ViewSources
 {
@@ -18,6 +20,7 @@ namespace AppStore.iOS.ViewSources
 
             collectionView.RegisterClassForSupplementaryView(typeof(AppDetailHeaderCell), UICollectionElementKindSection.Header, AppDetailHeaderCell.Id);
             collectionView.RegisterClassForCell(typeof(ScreenshotsCell), ScreenshotsCell.Id);
+            collectionView.RegisterClassForCell(typeof(AppDetailDescriptionCell), AppDetailDescriptionCell.Id);
         }
 
         public override UICollectionReusableView GetViewForSupplementaryElement(UICollectionView collectionView, NSString elementKind, NSIndexPath indexPath)
@@ -30,23 +33,36 @@ namespace AppStore.iOS.ViewSources
 
         public override nint GetItemsCount(UICollectionView collectionView, nint section)
         {
-            return 1;
+            return 2;
+        }
+
+        public override UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
+        {
+            var cell = GetOrCreateCellFor(collectionView, indexPath, null);
+
+            var bindable = cell as IMvxDataConsumer;
+            if (bindable != null)
+                bindable.DataContext = _appDetailView.ViewModel;
+
+            return cell;
         }
 
         protected override UICollectionViewCell GetOrCreateCellFor(UICollectionView collectionView, NSIndexPath indexPath, object item)
         {
-            var screenshotsCell = collectionView.DequeueReusableCell(ScreenshotsCell.Id, indexPath) as ScreenshotsCell;
-            screenshotsCell.DataContext = _appDetailView.ViewModel;
-
-            return screenshotsCell;
+            switch (indexPath.Item) {
+                case 1:
+                    return collectionView.DequeueReusableCell(AppDetailDescriptionCell.Id, indexPath) as AppDetailDescriptionCell;
+                default:
+                    return collectionView.DequeueReusableCell(ScreenshotsCell.Id, indexPath) as ScreenshotsCell;
+            }
         }
 
         #region IUICollectionViewDelegateFlowLayout
-        
+
         [Export("collectionView:layout:sizeForItemAtIndexPath:")]
         public CGSize GetSizeForItem(UICollectionView collectionView, UICollectionViewLayout layout, NSIndexPath indexPath)
         {
-            return new CGSize(_appDetailView.View.Frame.Width, 200);
+            return new CGSize(_appDetailView.View.Frame.Width, 170);
         }
 
         [Export("collectionView:layout:referenceSizeForHeaderInSection:")]

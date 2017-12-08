@@ -20,19 +20,6 @@ namespace AppStore.iOS.ViewSources
             collectionView.RegisterClassForCell(typeof(ScreenshotImageCell), ScreenshotImageCell.Id);
         }
 
-        public override IEnumerable ItemsSource
-        {
-            get => base.ItemsSource;
-            
-            set
-            {
-                if (value == null)
-                    return;
-
-                base.ItemsSource = value;
-            }
-        }
-
         #region IUICollectionViewDelegateFlowLayout
 
         [Export("collectionView:layout:sizeForItemAtIndexPath:")]

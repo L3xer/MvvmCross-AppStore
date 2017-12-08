@@ -32,6 +32,22 @@ namespace AppStore.iOS.Cells
             }
         }
 
+        private UIView dividerLineView;
+        public UIView DividerLineView
+        {
+            get
+            {
+                if (dividerLineView == null) {
+                    dividerLineView = new UIView {
+                        BackgroundColor = new UIColor(0.4f, 0.4f),
+                        TranslatesAutoresizingMaskIntoConstraints = false
+                    };
+                }
+
+                return dividerLineView;
+            }
+        }
+
         private ScreenshotsCollectionViewSource _source;
 
         public ScreenshotsCell(IntPtr handle) : base(handle)
@@ -43,12 +59,15 @@ namespace AppStore.iOS.Cells
         private void SetupViews()
         {
             AddSubview(CollectionView);
+            AddSubview(DividerLineView);
 
             _source = new ScreenshotsCollectionViewSource(this, CollectionView, ScreenshotImageCell.Id);
             CollectionView.Source = _source;
 
             AddConstraints(NSLayoutConstraint.FromVisualFormat("H:|[v0]|", 0, "v0", CollectionView));
-            AddConstraints(NSLayoutConstraint.FromVisualFormat("V:|[v0]|", 0, "v0", CollectionView));
+            AddConstraints(NSLayoutConstraint.FromVisualFormat("H:|-14-[v0]|", 0, "v0", DividerLineView));
+
+            AddConstraints(NSLayoutConstraint.FromVisualFormat("V:|[v0][v1(1)]|", 0, "v0", CollectionView, "v1", DividerLineView));
         }
 
         private void SetupBindings()

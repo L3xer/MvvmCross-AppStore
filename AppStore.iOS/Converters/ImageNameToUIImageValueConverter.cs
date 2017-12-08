@@ -8,6 +8,8 @@ namespace AppStore.iOS.Converters
 {
     public class ImageNameToUIImageValueConverter : IMvxValueConverter
     {
+        public static ImageNameToUIImageValueConverter Instance = new ImageNameToUIImageValueConverter();
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string imageName = (string)value;

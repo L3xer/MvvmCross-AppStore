@@ -133,7 +133,7 @@ namespace AppStore.iOS.Cells
                 var set = this.CreateBindingSet<AppDetailHeaderCell, StoreApp>();
                 set.Bind(NameLabel).To(a => a.Name);
                 set.Bind(BuyButton).For("Title").To(a => a.Price).WithConversion(new PriceToFormattedPriceValueConverter());
-                set.Bind(ImageView).For(iv => iv.Image).To(a => a.ImageName).WithConversion(new ImageNameToUIImageValueConverter());
+                set.Bind(ImageView).For(iv => iv.Image).To(a => a.ImageName).WithConversion(ImageNameToUIImageValueConverter.Instance);
                 set.Apply();
             });
         }

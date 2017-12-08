@@ -90,6 +90,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Cells\AppCell.cs" />
+    <Compile Include="Cells\AppDetailDescriptionCell.cs" />
     <Compile Include="Cells\AppDetailHeaderCell.cs" />
     <Compile Include="Cells\CategoryCell.cs" />
     <Compile Include="Cells\LargeAppCell.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Cells\ScreenshotImageCell.cs" />
     <Compile Include="Cells\ScreenshotsCell.cs" />
     <Compile Include="Controls\ASLabel.cs" />
+    <Compile Include="Converters\AppDetailDescriptionToAttributedTextConverter.cs" />
     <Compile Include="Converters\ImageNameToUIImageValueConverter.cs" />
     <Compile Include="DebugTrace.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />

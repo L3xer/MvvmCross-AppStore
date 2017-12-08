@@ -11,6 +11,16 @@ namespace Appstore.Core.ViewModels
         public StoreApp StoreApp { get; set; }
         public MvxObservableCollection<string> Screenshots { get; } = new MvxObservableCollection<string>();
 
+        private string _appDetailDescription;
+        public string AppDetailDescription
+        {
+            get { return _appDetailDescription; }
+            set
+            {
+                SetProperty(ref _appDetailDescription, value);
+            }
+        }
+
         private IAppStoreService _appStoreService;
 
         public AppDetailViewModel(IAppStoreService appStoreService)
@@ -28,6 +38,7 @@ namespace Appstore.Core.ViewModels
             StoreApp = await _appStoreService.GetAppDetailsAsync(StoreApp.Id);
 
             Screenshots.ReplaceRange(StoreApp.Screenshots);
+            AppDetailDescription = StoreApp.Description;
         }
     }
 }

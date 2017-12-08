@@ -47,7 +47,7 @@ namespace AppStore.iOS.Cells
         {
             this.DelayBind(() => {
                 var set = this.CreateBindingSet<LargeAppCell, StoreApp>();
-                set.Bind(ImageView).For(iv => iv.Image).To(a => a.ImageName).WithConversion(new ImageNameToUIImageValueConverter());
+                set.Bind(ImageView).For(iv => iv.Image).To(a => a.ImageName).WithConversion(ImageNameToUIImageValueConverter.Instance);
                 set.Apply();
             });
         }

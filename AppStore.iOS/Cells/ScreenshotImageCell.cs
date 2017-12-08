@@ -47,7 +47,7 @@ namespace AppStore.iOS.Cells
         {
             this.DelayBind(() => {
                 var set = this.CreateBindingSet<ScreenshotImageCell, string>();
-                set.Bind(ImageView).For(iv => iv.Image).To(imageName => imageName).WithConversion(new ImageNameToUIImageValueConverter());
+                set.Bind(ImageView).For(iv => iv.Image).To(imageName => imageName).WithConversion(ImageNameToUIImageValueConverter.Instance);
                 set.Apply();
             });
         }

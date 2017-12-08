@@ -111,7 +111,7 @@ namespace AppStore.iOS.Cells
                 set.Bind(NameLabel).For(l => l.LabelText).To(a => a.Name);
                 set.Bind(CategoryLabel).To(a => a.Category);
                 set.Bind(PriceLabel).To(a => a.Price).WithConversion(new PriceToFormattedPriceValueConverter());
-                set.Bind(ImageView).For(iv => iv.Image).To(a => a.ImageName).WithConversion(new ImageNameToUIImageValueConverter());
+                set.Bind(ImageView).For(iv => iv.Image).To(a => a.ImageName).WithConversion(ImageNameToUIImageValueConverter.Instance);
                 set.Apply();
             });
         }
